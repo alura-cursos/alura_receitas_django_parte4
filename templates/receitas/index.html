@@ -40,5 +40,45 @@
     </section>
     <!-- ##### Best Receipe Area End ##### -->
 
+    <!-- ##### Pagination ##### -->
+    <section class="top-catagory-area section-padding-20-0">
+        <div class="container">
+            {% if receitas.has_other_pages %}
+            <ul class="pagination">
+                {% if receitas.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ receitas.previous_page_number }}" class="page-link">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&laquo;</a>
+                </li>
+                {% endif %}
+                {% for pagina in receitas.paginator.page_range %}
+                {% if receitas.number == pagina %}
+                <li class="page-item active">
+                    <a class="page-link">{{ pagina }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a href="?page={{pagina}}" class="page-link">{{pagina}}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if receitas.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ receitas.next_page_number }}" class="page-link">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </section>
+    <!-- ##### Pagination End ##### -->
+
     {% include 'partials/_footer.html' %}
 {% endblock %}
